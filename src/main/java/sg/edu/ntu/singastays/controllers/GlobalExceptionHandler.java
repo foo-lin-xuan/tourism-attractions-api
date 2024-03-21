@@ -12,24 +12,39 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import sg.edu.ntu.singastays.entities.ErrorResponse;
+import sg.edu.ntu.singastays.exceptions.AttractionNotFoundException;
+import sg.edu.ntu.singastays.exceptions.CategoryAlreadyExistsException;
+import sg.edu.ntu.singastays.exceptions.CategoryNotFoundException;
+import sg.edu.ntu.singastays.exceptions.DeleteNonEmptyCategoryException;
 import sg.edu.ntu.singastays.exceptions.MemberNotFoundException;
 // import sg.edu.ntu.singastays.exceptions.InteractionNotFoundException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
-    
-    // this is handler for MemberNotFoundException
-    @ExceptionHandler({MemberNotFoundException.class})
-    public ResponseEntity<ErrorResponse> handleResourceNotFoundException(MemberNotFoundException ex){
+
+    // this is handler for MemberNotFoundException, CategoryNotFoundException,
+    // AttractionNotFoundException
+    @ExceptionHandler({ MemberNotFoundException.class, CategoryNotFoundException.class,
+            AttractionNotFoundException.class })
+    public ResponseEntity<ErrorResponse> handleResourceNotFoundException(Exception ex) {
         ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), LocalDateTime.now());
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
+    // this is handler for DeleteNonEmptyCategoryException
+    @ExceptionHandler({ DeleteNonEmptyCategoryException.class, CategoryAlreadyExistsException.class })
+    public ResponseEntity<ErrorResponse> handleConflictsException(Exception ex) {
+        ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), LocalDateTime.now());
+        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
+    }
+
     // [Activity 1 - Refactor]
     // @ExceptionHandler(InteractionNotFoundException.class)
-    // public ResponseEntity<ErrorResponse> handleInteractionNotFoundException(MemberNotFoundException ex){
-    //     ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), LocalDateTime.now());
-    //     return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    // public ResponseEntity<ErrorResponse>
+    // handleInteractionNotFoundException(MemberNotFoundException ex){
+    // ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(),
+    // LocalDateTime.now());
+    // return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     // }
 
     @ExceptionHandler(EmptyResultDataAccessException.class)
@@ -39,7 +54,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponse> handleValidationExceptions(MethodArgumentNotValidException ex){
+    public ResponseEntity<ErrorResponse> handleValidationExceptions(MethodArgumentNotValidException ex) {
         // Get a list of all validation errors from the exception object
         List<ObjectError> validationErrors = ex.getBindingResult().getAllErrors();
 

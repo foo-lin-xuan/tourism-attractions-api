@@ -35,7 +35,7 @@ public class AttractionController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Attraction> getAttraction(@PathVariable Integer id) {
+    public ResponseEntity<Attraction> getAttraction(@PathVariable Long id) {
         Optional<Attraction> optionalAttraction = attractionRepository.findById(id);
         if (optionalAttraction.isPresent()) {
             Attraction foundAttraction = optionalAttraction.get();
@@ -51,7 +51,7 @@ public class AttractionController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Attraction> updateAttraction(@PathVariable Integer id, @RequestBody Attraction attraction) {
+    public ResponseEntity<Attraction> updateAttraction(@PathVariable Long id, @RequestBody Attraction attraction) {
         Optional<Attraction> optionalAttraction = attractionRepository.findById(id);
         if (optionalAttraction.isPresent()) {
             Attraction attractionToUpdate = optionalAttraction.get();
@@ -64,7 +64,7 @@ public class AttractionController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Attraction> deleteAttraction(@PathVariable Integer id) {
+    public ResponseEntity<Attraction> deleteAttraction(@PathVariable Long id) {
         attractionRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
