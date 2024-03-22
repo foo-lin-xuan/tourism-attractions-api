@@ -63,6 +63,7 @@ public class MemberServiceImpl implements MemberService {
         memberToUpdate.setLastName(member.getLastName());
         memberToUpdate.setEmail(member.getEmail());
         memberToUpdate.setContactNo(member.getContactNo());
+        memberToUpdate.setCreatedDate(member.getCreatedDate());
         // memberToUpdate.setJobTitle(member.getJobTitle());
         // memberToUpdate.setYearOfBirth(member.getYearOfBirth());
         // save the updated member back to the database
