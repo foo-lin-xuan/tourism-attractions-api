@@ -40,8 +40,8 @@ public class DataLoader {
         memberRepository.save(new Member("Alfred","Tan", "67485823", "at@gmail.com", dateFormat.parse("2024-02-07")));
         memberRepository.save(new Member("Jimmy", "Lim", "67485453", "jl@gmail.com", dateFormat.parse("2024-02-09")));
 
-        attractionRepository.save(new Attraction("Escape Theme Park", "Water Base Activities", dateFormat.parse("2024-02-05"), dateFormat.parse("2024-02-06")));
-        attractionRepository.save(new Attraction("Adventure Cove", "Night Life Activities", dateFormat.parse("2024-02-07"), dateFormat.parse("2024-02-08")));
-        attractionRepository.save(new Attraction("Hydro-Dash", "Theme Park", dateFormat.parse("2024-02-09"), dateFormat.parse("2024-02-10")));
+        attractionRepository.save(new Attraction("Escape Theme Park"));
+        attractionRepository.save(new Attraction("Adventure Cove"));
+        attractionRepository.save(new Attraction("Hydro-Dash"));
     }
 }

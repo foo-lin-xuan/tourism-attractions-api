@@ -18,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.val;
 
 @Entity
 @Table(name = "interaction")
@@ -45,7 +46,7 @@ public class Interaction {
     @Column(name = "interaction_date")
     private LocalDate interactionDate;
 
-    @JsonBackReference
+    @JsonBackReference(value = "member-interaction")
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "member_id", referencedColumnName = "id")
     private Member member;
