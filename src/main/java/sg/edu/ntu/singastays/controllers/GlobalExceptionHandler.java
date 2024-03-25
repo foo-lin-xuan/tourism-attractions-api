@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import sg.edu.ntu.singastays.entities.ErrorResponse;
 import sg.edu.ntu.singastays.exceptions.MemberNotFoundException;
+import sg.edu.ntu.singastays.exceptions.AttractionNotFoundException;
 // import sg.edu.ntu.singastays.exceptions.InteractionNotFoundException;
 
 @ControllerAdvice
@@ -21,6 +22,13 @@ public class GlobalExceptionHandler {
     // this is handler for MemberNotFoundException
     @ExceptionHandler({MemberNotFoundException.class})
     public ResponseEntity<ErrorResponse> handleResourceNotFoundException(MemberNotFoundException ex){
+        ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), LocalDateTime.now());
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
+    // this is handler for AttractionNotFoundException
+    @ExceptionHandler({AttractionNotFoundException.class})
+    public ResponseEntity<ErrorResponse> handleResourceNotFoundException(AttractionNotFoundException ex){
         ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), LocalDateTime.now());
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
@@ -60,7 +68,7 @@ public class GlobalExceptionHandler {
         // logger.error(ex.getMessage(), ex);
 
         // return generic error message;
-        ErrorResponse errorResponse = new ErrorResponse("Something went wrong", LocalDateTime.now());
+        ErrorResponse errorResponse = new ErrorResponse("Something went wrongssss", LocalDateTime.now());
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

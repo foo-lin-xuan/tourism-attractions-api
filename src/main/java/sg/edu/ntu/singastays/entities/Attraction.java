@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,34 +18,50 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
+@RequiredArgsConstructor
 @Table(name = "attraction")
 public class Attraction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "attraction_name")
+    @lombok.NonNull
+    private String attractionName;
 
-    @Column(name = "category")
-    private String category;
+    @Column(name = "attraction_category_name")
+    private String attractionCategoryName;
 
     @CreationTimestamp
-    @Column(name = "created_date")
-    private Date createdDate;
+    @Column(name = "attraction_created_date")
+    private Date attractionCreatedDate;
 
     @UpdateTimestamp
-    @Column(name = "updated_timestamp")
-    private Date updatedDate;
+    @Column(name = "attraction_updated_timestamp")
+    private Date attractionUpdatedDate;
 
     // For reference if needed
     // @JsonBackReference
     // @OneToMany(mappedBy = "attraction", cascade = CascadeType.ALL)
     // private List<Favourite> favourites;
+
+    @OneToMany(mappedBy = "attraction", cascade = CascadeType.ALL)
+    private List<Interaction> interactions;
+
+    public Attraction(){}
+
+    public Attraction(String attractionName, String attractionCategoryName, Date attractionCreatedDate, Date attractionUpdatedDate) {
+        this();
+        this.attractionName = attractionName;
+        this.attractionCategoryName = attractionCategoryName;
+        this.attractionCreatedDate = attractionCreatedDate;
+        this.attractionUpdatedDate = attractionUpdatedDate;
+    }
 }
