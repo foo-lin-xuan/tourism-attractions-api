@@ -32,9 +32,9 @@ public class DataLoader {
         memberRepository.save(new Member("Jimmy", "Lim", "67485453", "jl@gmail.com"));
         // memberRepository.save(new Member("Steve", "Rogers", "12345678", 1940));
 
-        categoryRepository.save(Category.builder().name("Water Base Activities").build());
-        categoryRepository.save(Category.builder().name("Night Life Activities").build());
-        categoryRepository.save(Category.builder().name("Theme Park").build());
-        categoryRepository.save(Category.builder().name("Nature Park").build());
+        categoryRepository.save(new Category("Water Base Activities"));
+        categoryRepository.save(new Category("Night Life Activities"));
+        categoryRepository.save(new Category("Theme Park"));
+        categoryRepository.save(new Category("Nature Park"));
     }
 }

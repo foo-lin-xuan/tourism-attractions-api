@@ -17,11 +17,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-@Builder
+@NoArgsConstructor
+@RequiredArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -34,6 +37,7 @@ public class Category {
     @Column(name = "id")
     private Long id;
 
+    @NonNull
     @Column(name = "name", unique = true)
     private String name;
 
