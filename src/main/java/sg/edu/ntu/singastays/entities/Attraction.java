@@ -1,13 +1,13 @@
 package sg.edu.ntu.singastays.entities;
 
 import java.util.Date;
+import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -17,14 +17,18 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 @RequiredArgsConstructor
 @Table(name = "attraction")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
@@ -52,15 +56,5 @@ public class Attraction {
 
     @OneToMany(mappedBy = "attraction", cascade = CascadeType.ALL)
     private List<Interaction> interactions;
-
-    public Attraction(){}
-
-    public Attraction(String attractionName, String attractionCategoryName, Date attractionCreatedDate, Date attractionUpdatedDate) {
-        this();
-        this.attractionName = attractionName;
-        this.attractionCategoryName = attractionCategoryName;
-        this.attractionCreatedDate = attractionCreatedDate;
-        this.attractionUpdatedDate = attractionUpdatedDate;
-    }
 
 }

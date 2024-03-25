@@ -3,7 +3,6 @@
 package sg.edu.ntu.singastays.serviceImpls;
 
 import java.util.ArrayList;
-import java.util.List;
 import org.springframework.stereotype.Service;
 import sg.edu.ntu.singastays.entities.Attraction;
 import sg.edu.ntu.singastays.entities.Interaction;
@@ -14,11 +13,12 @@ import sg.edu.ntu.singastays.services.AttractionService;
 
 @Service
 public class AttractionServiceImpl implements AttractionService {
-    
+
     private final AttractionRepository attractionRepository;
     private final InteractionRepository interactionRepository;
 
-    public AttractionServiceImpl(AttractionRepository attractionRepository, InteractionRepository interactionRepository) {
+    public AttractionServiceImpl(AttractionRepository attractionRepository,
+            InteractionRepository interactionRepository) {
         this.attractionRepository = attractionRepository;
         this.interactionRepository = interactionRepository;
     }
@@ -42,7 +42,6 @@ public class AttractionServiceImpl implements AttractionService {
     public Attraction updateAttraction(Long id, Attraction attraction) {
         Attraction existingAttraction = getAttraction(id);
         existingAttraction.setAttractionName(attraction.getAttractionName());
-        existingAttraction.setAttractionCategoryName(attraction.getAttractionCategoryName());
         existingAttraction.setAttractionCreatedDate(attraction.getAttractionCreatedDate());
         existingAttraction.setAttractionUpdatedDate(attraction.getAttractionUpdatedDate());
         return attractionRepository.save(existingAttraction);
@@ -60,9 +59,11 @@ public class AttractionServiceImpl implements AttractionService {
         return interactionRepository.save(interaction);
     }
 
-    @Override
-    public ArrayList<Attraction> searchAttractions(String attractionCategoryName) {
-        List<Attraction> foundAttractions = attractionRepository.findByAttractionCategoryName(attractionCategoryName);
-        return new ArrayList<>(foundAttractions);
-    }
+    // @Override
+    // public ArrayList<Attraction> searchAttractions(String attractionCategoryName)
+    // {
+    // List<Attraction> foundAttractions =
+    // attractionRepository.findByAttractionCategoryName(attractionCategoryName);
+    // return new ArrayList<>(foundAttractions);
+    // }
 }

@@ -9,7 +9,6 @@ import sg.edu.ntu.singastays.services.AttractionService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,27 +31,32 @@ public class AttractionController {
         this.attractionService = attractionService;
     }
 
-    @GetMapping("/search")
-    public ResponseEntity<ArrayList<Attraction>> searchAttractions(@RequestParam String attractionName) {
-        ArrayList<Attraction> foundAttractions = attractionService.searchAttractions(attractionName);
-        return new ResponseEntity<>(foundAttractions, HttpStatus.OK);
-    }
+    // @GetMapping("/search")
+    // public ResponseEntity<ArrayList<Attraction>> searchAttractions(@RequestParam
+    // String attractionName) {
+    // ArrayList<Attraction> foundAttractions =
+    // attractionService.searchAttractions(attractionName);
+    // return new ResponseEntity<>(foundAttractions, HttpStatus.OK);
+    // }
 
     // CREATE
     @PostMapping("")
     public ResponseEntity<?> createAttraction(@Valid @RequestBody Attraction attraction, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            // If there are validation errors, return a bad request response with the error details
+            // If there are validation errors, return a bad request response with the error
+            // details
             return ResponseEntity.badRequest().body(bindingResult.getAllErrors());
         }
 
         Attraction newAttraction = attractionService.createAttraction(attraction);
         if (newAttraction == null) {
-            // If the creation process failed for some reason, return an internal server error response
+            // If the creation process failed for some reason, return an internal server
+            // error response
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create attraction");
         }
 
-        // If the creation was successful, return a response with the created attraction and a status of CREATED
+        // If the creation was successful, return a response with the created attraction
+        // and a status of CREATED
         return ResponseEntity.status(HttpStatus.CREATED).body(newAttraction);
     }
 
@@ -74,7 +78,7 @@ public class AttractionController {
     @PutMapping("/{id}")
     public ResponseEntity<Attraction> updateAttraction(@PathVariable Long id, @RequestBody Attraction attraction) {
         Attraction updatedAttraction = attractionService.updateAttraction(id, attraction);
-        return new ResponseEntity<>(updatedAttraction, HttpStatus.OK);        
+        return new ResponseEntity<>(updatedAttraction, HttpStatus.OK);
     }
 
     // DELETE

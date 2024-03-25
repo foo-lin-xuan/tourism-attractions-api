@@ -5,7 +5,7 @@ import sg.edu.ntu.singastays.entities.Attraction;
 import sg.edu.ntu.singastays.entities.Interaction;
 
 public interface AttractionService {
-    
+
     Attraction createAttraction(Attraction attraction);
 
     Attraction getAttraction(Long id);
@@ -18,5 +18,5 @@ public interface AttractionService {
 
     Interaction addInteractionToAttraction(Long id, Interaction interaction);
 
-    ArrayList<Attraction> searchAttractions(String attractionCategoryName);
+    // ArrayList<Attraction> searchAttractions(String attractionCategoryName);
 }
