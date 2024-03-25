@@ -42,8 +42,6 @@ public class AttractionServiceImpl implements AttractionService {
     public Attraction updateAttraction(Long id, Attraction attraction) {
         Attraction existingAttraction = getAttraction(id);
         existingAttraction.setAttractionName(attraction.getAttractionName());
-        existingAttraction.setAttractionCreatedDate(attraction.getAttractionCreatedDate());
-        existingAttraction.setAttractionUpdatedDate(attraction.getAttractionUpdatedDate());
         return attractionRepository.save(existingAttraction);
     }
 
