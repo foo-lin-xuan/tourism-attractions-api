@@ -18,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.val;
 
 @Entity
 @Table(name = "interaction")
@@ -30,6 +31,11 @@ public class Interaction {
     @Column(name = "id")
     private Long id;
 
+    @JsonBackReference // This prevents the serializer from infinite recursion
+    @ManyToOne
+    @JoinColumn(name = "attraction_id")
+    private Attraction attraction;
+
     // [Activity 2 - validation]
     @Size(min = 3, max = 30, message = "Remarks has to be more than 3 characters and less than 30 characters")
     @Column(name = "remarks")
@@ -40,8 +46,13 @@ public class Interaction {
     @Column(name = "interaction_date")
     private LocalDate interactionDate;
 
-    @JsonBackReference
+    @JsonBackReference(value = "member-interaction")
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "member_id", referencedColumnName = "id")
     private Member member;
+
+    // @JsonBackReference
+    // @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    // @JoinColumn(name = "attraction_id", referencedColumnName = "id")
+    // private Attraction attraction;
 }

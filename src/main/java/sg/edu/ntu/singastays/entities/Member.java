@@ -1,6 +1,10 @@
 package sg.edu.ntu.singastays.entities;
 
 import java.util.List;
+import java.util.Date;
+
+import org.springframework.data.annotation.CreatedDate;
+// import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -10,6 +14,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -50,6 +56,10 @@ public class Member {
     @Column(name = "contact_no")
     private String contactNo;
 
+    @Temporal(TemporalType.DATE)
+    @CreatedDate
+    private Date createdDate;
+
     // @Column(name = "job_title")
     // private String jobTitle;
 
@@ -63,12 +73,12 @@ public class Member {
 
     public Member(){}
 
-    public Member(String firstName, String lastName, String contactNo, String email) {
+    public Member(String firstName, String lastName, String contactNo, String email, Date createdDate) {
         this();
         this.firstName = firstName;
         this.lastName = lastName;
         this.contactNo = contactNo;
-        // this.yearOfBirth = yearOfBirth;
         this.email = email;
+        this.createdDate = createdDate;
     }
 }

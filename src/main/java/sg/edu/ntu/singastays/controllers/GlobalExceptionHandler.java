@@ -17,6 +17,7 @@ import sg.edu.ntu.singastays.exceptions.CategoryAlreadyExistsException;
 import sg.edu.ntu.singastays.exceptions.CategoryNotFoundException;
 import sg.edu.ntu.singastays.exceptions.DeleteNonEmptyCategoryException;
 import sg.edu.ntu.singastays.exceptions.MemberNotFoundException;
+import sg.edu.ntu.singastays.exceptions.AttractionNotFoundException;
 // import sg.edu.ntu.singastays.exceptions.InteractionNotFoundException;
 
 @ControllerAdvice
@@ -31,7 +32,8 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
-    // this is handler for DeleteNonEmptyCategoryException
+
+    // this is handler for DeleteNonEmptyCategoryException, CategoryAlreadyExistsException
     @ExceptionHandler({ DeleteNonEmptyCategoryException.class, CategoryAlreadyExistsException.class })
     public ResponseEntity<ErrorResponse> handleConflictsException(Exception ex) {
         ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), LocalDateTime.now());
@@ -75,7 +77,7 @@ public class GlobalExceptionHandler {
         // logger.error(ex.getMessage(), ex);
 
         // return generic error message;
-        ErrorResponse errorResponse = new ErrorResponse("Something went wrong", LocalDateTime.now());
+        ErrorResponse errorResponse = new ErrorResponse("Something went wrongssss", LocalDateTime.now());
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

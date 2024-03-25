@@ -70,6 +70,7 @@ public class MemberController {
         return new ResponseEntity<>(updatedMember, HttpStatus.OK);        
     }
 
+    // DELETE
     @DeleteMapping("/{id}")
     public ResponseEntity<Member> deleteMember(@PathVariable Long id) {
         memberService.deleteMember(id);

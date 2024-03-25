@@ -8,6 +8,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,11 +19,13 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
+@RequiredArgsConstructor
 @Table(name = "attraction")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Attraction {
@@ -30,18 +34,33 @@ public class Attraction {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "attraction_name")
+    @NonNull
+    private String attractionName;
 
     @CreationTimestamp
-    @Column(name = "created_date")
-    private Date createdDate;
+    @Column(name = "attraction_created_date")
+    private Date attractionCreatedDate;
 
     @UpdateTimestamp
-    @Column(name = "updated_timestamp")
-    private Date updatedDate;
+    @Column(name = "attraction_updated_timestamp")
+    private Date attractionUpdatedDate;
 
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
+
+    @OneToMany(mappedBy = "attraction", cascade = CascadeType.ALL)
+    private List<Interaction> interactions;
+
+    public Attraction(){}
+
+    public Attraction(String attractionName, String attractionCategoryName, Date attractionCreatedDate, Date attractionUpdatedDate) {
+        this();
+        this.attractionName = attractionName;
+        this.attractionCategoryName = attractionCategoryName;
+        this.attractionCreatedDate = attractionCreatedDate;
+        this.attractionUpdatedDate = attractionUpdatedDate;
+    }
+
 }
