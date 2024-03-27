@@ -31,7 +31,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Table(name = "attraction")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(scope = Attraction.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Attraction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

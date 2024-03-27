@@ -29,7 +29,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "category")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(scope = Category.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Category {
 
     @Id
