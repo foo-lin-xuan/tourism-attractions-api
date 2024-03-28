@@ -46,9 +46,9 @@ public class DataLoader {
         // memberRepository.save(new Member("John", "Chan", "67485867", "jc@gmail.com", dateFormat.parse("2024-02-05")));
         // memberRepository.save(new Member("Alfred", "Tan", "67485823", "at@gmail.com", dateFormat.parse("2024-02-07")));
         // memberRepository.save(new Member("Jimmy", "Lim", "67485453", "jl@gmail.com", dateFormat.parse("2024-02-09")));
-        Member member1 = new Member("John", "Chan", "67485867", "jc@gmail.com", dateFormat.parse("2024-02-05"));
-        Member member2 = new Member("Alfred", "Tan", "67485823", "at@gmail.com", dateFormat.parse("2024-02-07"));
-        Member member3 = new Member("Jimmy", "Lim", "67485453", "jl@gmail.com", dateFormat.parse("2024-02-09"));
+        Member member1 = new Member("John", "Chan", "67485867", "jc@gmail.com");
+        Member member2 = new Member("Alfred", "Tan", "67485823", "at@gmail.com");
+        Member member3 = new Member("Jimmy", "Lim", "67485453", "jl@gmail.com");
         memberRepository.save(member1);
         memberRepository.save(member2);
         memberRepository.save(member3);

@@ -1,8 +1,10 @@
 package sg.edu.ntu.singastays.entities;
 
 import java.util.List;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 // import org.springframework.format.annotation.DateTimeFormat;
 
@@ -56,8 +58,8 @@ public class Member {
     @Column(name = "contact_no")
     private String contactNo;
 
-    @Temporal(TemporalType.DATE)
-    @CreatedDate
+    @CreationTimestamp
+    @Column(name = "created_date")
     private Date createdDate;
 
     // @Column(name = "job_title")
@@ -73,12 +75,16 @@ public class Member {
 
     public Member(){}
 
-    public Member(String firstName, String lastName, String contactNo, String email, Date createdDate) {
+    public Member(String firstName, String lastName, String contactNo, String email) {
         this();
         this.firstName = firstName;
         this.lastName = lastName;
         this.contactNo = contactNo;
         this.email = email;
-        this.createdDate = createdDate;
+    }
+
+    public String getCreatedDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return dateFormat.format(this.createdDate);
     }
 }

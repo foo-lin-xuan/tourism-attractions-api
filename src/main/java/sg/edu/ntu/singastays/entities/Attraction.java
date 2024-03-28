@@ -1,5 +1,6 @@
 package sg.edu.ntu.singastays.entities;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -7,8 +8,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.CascadeType;
@@ -34,7 +33,6 @@ import lombok.Setter;
 @RequiredArgsConstructor
 @Table(name = "attraction")
 @JsonIdentityInfo(scope = Attraction.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-@JsonIdentityReference(alwaysAsId = true)
 public class Attraction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,5 +57,15 @@ public class Attraction {
 
     @OneToMany(mappedBy = "attraction", cascade = CascadeType.ALL)
     private List<Interaction> interactions;
+
+    public String getAttractionCreatedDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return dateFormat.format(this.attractionCreatedDate);
+    }
+
+    public String getAttractionUpdatedDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return dateFormat.format(this.attractionUpdatedDate);
+    }
 
 }
