@@ -36,7 +36,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "member")
 public class Member {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -66,14 +66,19 @@ public class Member {
     // private String jobTitle;
 
     // [Activity 2 - validation]
-    // @Range(min = 1940, max = 2005, message = "Year Of Birth should be between 1940 and 2005")
+    // @Range(min = 1940, max = 2005, message = "Year Of Birth should be between
+    // 1940 and 2005")
     // @Column(name = "year_of_birth")
     // private int yearOfBirth;
+
+    @OneToMany(mappedBy = "member")
+    List<UserFavourite> favourites;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Interaction> interactions;
 
-    public Member(){}
+    public Member() {
+    }
 
     public Member(String firstName, String lastName, String contactNo, String email) {
         this();

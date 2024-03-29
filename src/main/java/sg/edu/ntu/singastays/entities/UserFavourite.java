@@ -2,6 +2,7 @@ package sg.edu.ntu.singastays.entities;
 
 import org.apache.catalina.User;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -22,15 +23,17 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-//@NoArgsConstructor
-//@RequiredArgsConstructor
+// @NoArgsConstructor
+// @RequiredArgsConstructor
 @Table(name = "user_favourite")
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+// @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+// property = "id")
 public class UserFavourite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
@@ -44,7 +47,8 @@ public class UserFavourite {
     private Attraction attraction;
 
     // Constructors (including a no-arg constructor)
-    public UserFavourite() {}
+    public UserFavourite() {
+    }
 
     public UserFavourite(Member member, Category category, Attraction attraction) {
         this();
@@ -55,37 +59,37 @@ public class UserFavourite {
 
     // Getters and setters
     // Getters and setters
-//     public Long getId() {
-//         return id;
-//     }
+    // public Long getId() {
+    // return id;
+    // }
 
-//     public void setId(Long id) {
-//         this.id = id;
-//     }
+    // public void setId(Long id) {
+    // this.id = id;
+    // }
 
-//     public Member getMember() {
-//         return member;
-//     }
+    // public Member getMember() {
+    // return member;
+    // }
 
-//     public void setMember(Member member) {
-//         this.member = member;
-//     }
+    // public void setMember(Member member) {
+    // this.member = member;
+    // }
 
-//     public Category getCategory() {
-//         return category;
-//     }
+    // public Category getCategory() {
+    // return category;
+    // }
 
-//     public void setCategory(Category category) {
-//         this.category = category;
-//     }
+    // public void setCategory(Category category) {
+    // this.category = category;
+    // }
 
-//     public Attraction getAttraction() {
-//         return attraction;
-//     }
+    // public Attraction getAttraction() {
+    // return attraction;
+    // }
 
-//     public void setAttraction(Attraction attraction) {
-//         this.attraction = attraction;
-//     }
-// }
+    // public void setAttraction(Attraction attraction) {
+    // this.attraction = attraction;
+    // }
+    // }
 
 }

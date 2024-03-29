@@ -7,8 +7,11 @@ import sg.edu.ntu.singastays.entities.UserFavourite;
 
 public interface UserFavouriteService {
     ArrayList<UserFavourite> getAllUserFavourites();
+
     UserFavourite getUserFavouriteById(Long id);
-    UserFavourite createUserFavourite(UserFavourite userFavourite);
-    //UserFavourite updateUserFavourite(Long id, UserFavourite userFavourite);
+
+    UserFavourite createUserFavourite(Long memberId, Long categoryId, Long attractionId);
+
+    // UserFavourite updateUserFavourite(Long id, UserFavourite userFavourite);
     void deleteUserFavourite(Long id);
 }

@@ -21,19 +21,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 @RestController
 @RequestMapping("/user-favourites")
 
 public class UserFavouriteController {
-    
+
     @Autowired
     private UserFavouriteService userFavouriteService;
 
     // Create a new UserFavourite
     @PostMapping
-    public ResponseEntity<UserFavourite> createUserFavourite(@RequestBody UserFavourite userFavourite) {
-        UserFavourite newUserFavourite = userFavouriteService.createUserFavourite(userFavourite);
+    public ResponseEntity<UserFavourite> createUserFavourite(@RequestParam Long memberId,
+            @RequestParam(required = false) Long categoryId, @RequestParam(required = false) Long attractionId) {
+        UserFavourite newUserFavourite = userFavouriteService.createUserFavourite(memberId, categoryId, attractionId);
         return new ResponseEntity<>(newUserFavourite, HttpStatus.CREATED);
     }
 
@@ -53,9 +53,11 @@ public class UserFavouriteController {
 
     // Update UserFavourite by ID
     // @PutMapping("/{id}")
-    // public ResponseEntity<UserFavourite> updateUserFavourite(@PathVariable Long id, @RequestBody UserFavourite userFavourite) {
-    //     UserFavourite updatedUserFavourite = userFavouriteService.updateUserFavourite(id, userFavourite);
-    //     return new ResponseEntity<>(updatedUserFavourite, HttpStatus.OK);
+    // public ResponseEntity<UserFavourite> updateUserFavourite(@PathVariable Long
+    // id, @RequestBody UserFavourite userFavourite) {
+    // UserFavourite updatedUserFavourite =
+    // userFavouriteService.updateUserFavourite(id, userFavourite);
+    // return new ResponseEntity<>(updatedUserFavourite, HttpStatus.OK);
     // }
 
     // Delete UserFavourite by ID
