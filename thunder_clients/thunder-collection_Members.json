@@ -1,0 +1,128 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Members",
+    "dateExported": "2024-04-01T11:46:38.678Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "ea2109f3-d8f6-4293-be8f-02ad9bf1e671",
+            "colId": "157a9295-da4e-41c3-a870-038a21048718",
+            "containerId": "",
+            "name": "Create Member",
+            "url": "http://localhost:8080/members",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-03-19T13:16:56.023Z",
+            "modified": "2024-03-26T14:46:17.455Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n    \"firstName\": \"Aishah\",\n    \"lastName\": \"Dawood\",\n    \"email\": \"shahdawood@gmail.com\",\n    \"contactNo\": \"88899976\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "911ef516-89d8-4394-96a6-60b74a0c1154",
+            "colId": "157a9295-da4e-41c3-a870-038a21048718",
+            "containerId": "",
+            "name": "Get All Member",
+            "url": "http://localhost:8080/members",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2024-03-19T13:17:52.425Z",
+            "modified": "2024-03-19T13:59:45.829Z",
+            "headers": [],
+            "params": [],
+            "reqType": "get",
+            "tests": []
+        },
+        {
+            "_id": "a8ac2981-9f42-4449-a6bb-85d74f806854",
+            "colId": "157a9295-da4e-41c3-a870-038a21048718",
+            "containerId": "",
+            "name": "Get One Member",
+            "url": "http://localhost:8080/members/{id}",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2024-03-19T13:18:32.927Z",
+            "modified": "2024-03-30T02:22:19.873Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "id",
+                    "value": "4",
+                    "isPath": true
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "f1e32611-a880-4283-9e44-ee0f38f25bb4",
+            "colId": "157a9295-da4e-41c3-a870-038a21048718",
+            "containerId": "",
+            "name": "Update Member",
+            "url": "http://localhost:8080/members/{id}",
+            "method": "PUT",
+            "sortNum": 50000,
+            "created": "2024-03-19T13:19:00.160Z",
+            "modified": "2024-03-30T02:22:55.425Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "id",
+                    "value": "7",
+                    "isPath": true
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n    \"firstName\": \"Aishahahaahah\",\n    \"lastName\": \"Dawood\",\n    \"email\": \"shahdawood@gmail.com\",\n    \"contactNo\": \"88899976\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "3fe28b47-d412-49ca-90dc-236e6afdc2a3",
+            "colId": "157a9295-da4e-41c3-a870-038a21048718",
+            "containerId": "",
+            "name": "Delete Member",
+            "url": "http://localhost:8080/members/{id}",
+            "method": "DELETE",
+            "sortNum": 60000,
+            "created": "2024-03-19T13:19:41.628Z",
+            "modified": "2024-03-26T14:51:14.981Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "id",
+                    "value": "4",
+                    "isPath": true
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "a7dcd511-1a40-4086-b40d-76af14bb3da6",
+            "colId": "157a9295-da4e-41c3-a870-038a21048718",
+            "containerId": "",
+            "name": "Search Member",
+            "url": "http://localhost:8080/members/search?firstName=Aishahahaahah",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2024-03-19T13:20:09.872Z",
+            "modified": "2024-03-27T15:38:19.000Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "firstName",
+                    "value": "Aishahahaahah",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        }
+    ]
+}

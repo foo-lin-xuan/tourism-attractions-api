@@ -1,0 +1,129 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Category",
+    "dateExported": "2024-04-01T11:46:51.442Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "6e6e8e62-1d5d-416d-8dee-8f3672106d88",
+            "colId": "b10a4f4e-6a4a-48eb-a816-15df5343340a",
+            "containerId": "",
+            "name": "Create Category",
+            "url": "http://localhost:8080/categories",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-03-24T07:23:35.516Z",
+            "modified": "2024-03-30T02:32:59.230Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Nature Trail\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "cd0cc0ed-3f3b-4ec5-90b2-2a1eed342c8e",
+            "colId": "b10a4f4e-6a4a-48eb-a816-15df5343340a",
+            "containerId": "",
+            "name": "Add Attraction to Category",
+            "url": "http://localhost:8080/categories/1/attractions?attractionId=2",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-03-24T07:23:35.517Z",
+            "modified": "2024-03-30T01:36:40.132Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "attractionId",
+                    "value": "2",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "c074f45f-9d2e-47d0-a2d0-0df3f8f9b871",
+            "colId": "b10a4f4e-6a4a-48eb-a816-15df5343340a",
+            "containerId": "",
+            "name": "Get All Categories",
+            "url": "http://localhost:8080/categories",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2024-03-24T07:23:35.518Z",
+            "modified": "2024-03-24T07:23:35.518Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "755eb99f-a7db-4b91-a6bc-e47eb98a58b5",
+            "colId": "b10a4f4e-6a4a-48eb-a816-15df5343340a",
+            "containerId": "",
+            "name": "Get One Category",
+            "url": "http://localhost:8080/categories/1",
+            "method": "PUT",
+            "sortNum": 40000,
+            "created": "2024-03-24T07:23:35.519Z",
+            "modified": "2024-03-24T07:23:35.519Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\"name\": \"Water Base Activities\"}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "d7300e77-c16e-4bbc-9191-de1d89fcd8fc",
+            "colId": "b10a4f4e-6a4a-48eb-a816-15df5343340a",
+            "containerId": "",
+            "name": "Delete Category",
+            "url": "http://localhost:8080/categories/1",
+            "method": "DELETE",
+            "sortNum": 50000,
+            "created": "2024-03-24T07:23:35.520Z",
+            "modified": "2024-03-24T07:23:35.520Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "84d276f7-a244-4988-88b9-a32628b0877b",
+            "colId": "b10a4f4e-6a4a-48eb-a816-15df5343340a",
+            "containerId": "",
+            "name": "Remove All Attractions from Category",
+            "url": "http://localhost:8080/categories/1/attractions",
+            "method": "PUT",
+            "sortNum": 60000,
+            "created": "2024-03-24T07:23:35.521Z",
+            "modified": "2024-03-24T07:23:35.521Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "814888a2-83c8-49ff-8134-4fe936f31144",
+            "colId": "b10a4f4e-6a4a-48eb-a816-15df5343340a",
+            "containerId": "",
+            "name": "Search Category by Name",
+            "url": "http://localhost:8080/categories/search?name=Theme Park",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2024-03-24T07:23:35.522Z",
+            "modified": "2024-03-24T07:23:35.522Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "name",
+                    "value": "Theme Park",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        }
+    ]
+}

@@ -1,0 +1,76 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "UserFavourite",
+    "dateExported": "2024-04-01T11:46:57.110Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "f5ead505-477d-48cd-bf83-b628d7939c74",
+            "colId": "dea26876-7852-4190-96a8-db6f1d3f6793",
+            "containerId": "",
+            "name": "Get All UserFavourite",
+            "url": "http://localhost:8080/user-favourites",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-03-30T01:52:31.926Z",
+            "modified": "2024-03-30T01:52:31.926Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "b5c2b304-adbc-4d49-a068-730341c8e365",
+            "colId": "dea26876-7852-4190-96a8-db6f1d3f6793",
+            "containerId": "",
+            "name": "Get One UserFavourite",
+            "url": "http://localhost:8080/user-favourites/1",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-03-30T01:52:31.927Z",
+            "modified": "2024-03-30T02:36:03.952Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "ec11234e-138c-4d3b-b24e-22e961b2d598",
+            "colId": "dea26876-7852-4190-96a8-db6f1d3f6793",
+            "containerId": "",
+            "name": "Create UserFavourite",
+            "url": "http://localhost:8080/user-favourites?memberId=3&attractionId=1",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-03-30T01:52:31.928Z",
+            "modified": "2024-03-30T01:52:31.928Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "memberId",
+                    "value": "3",
+                    "isPath": false
+                },
+                {
+                    "name": "attractionId",
+                    "value": "1",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "806c437a-e849-4b9f-9562-3cc7cc38c261",
+            "colId": "dea26876-7852-4190-96a8-db6f1d3f6793",
+            "containerId": "",
+            "name": "Delete UserFavourite",
+            "url": "http://localhost:8080/user-favourites/1",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2024-03-30T01:52:31.929Z",
+            "modified": "2024-03-30T02:37:10.936Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        }
+    ]
+}

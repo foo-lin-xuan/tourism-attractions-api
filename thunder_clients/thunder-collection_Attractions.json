@@ -1,0 +1,89 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Attractions",
+    "dateExported": "2024-04-01T11:46:45.198Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "dde2f85a-188f-4ea3-9dfb-541857c2dea9",
+            "colId": "fdf8a9f9-63a7-4baf-a2fb-c0774215ed25",
+            "containerId": "",
+            "name": "Create Attraction",
+            "url": "http://localhost:8080/attractions",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-03-21T14:29:52.763Z",
+            "modified": "2024-03-25T09:33:09.164Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n    \"attractionName\": \"Escape Theme Park 1\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "241a022a-96c2-4e1f-8ab7-cd047ca0cff5",
+            "colId": "fdf8a9f9-63a7-4baf-a2fb-c0774215ed25",
+            "containerId": "",
+            "name": "Get All Attractions",
+            "url": "http://localhost:8080/attractions",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-03-21T14:29:52.765Z",
+            "modified": "2024-03-21T14:29:52.765Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "f304ce2e-9c97-4647-863b-bc0dbf8e440f",
+            "colId": "fdf8a9f9-63a7-4baf-a2fb-c0774215ed25",
+            "containerId": "",
+            "name": "Get One Attraction",
+            "url": "http://localhost:8080/attractions/4",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2024-03-21T14:29:52.766Z",
+            "modified": "2024-03-25T09:33:21.964Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "938fe34c-11c6-484b-8a2f-688debadb60c",
+            "colId": "fdf8a9f9-63a7-4baf-a2fb-c0774215ed25",
+            "containerId": "",
+            "name": "Update Attraction",
+            "url": "http://localhost:8080/attractions/4",
+            "method": "PUT",
+            "sortNum": 40000,
+            "created": "2024-03-21T14:29:52.767Z",
+            "modified": "2024-03-25T09:33:36.383Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n    \"attractionName\": \"Escape Theme Park 4\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "0a6d9fc4-f718-47b7-8aac-07290e8f477c",
+            "colId": "fdf8a9f9-63a7-4baf-a2fb-c0774215ed25",
+            "containerId": "",
+            "name": "Delete Attraction",
+            "url": "http://localhost:8080/attractions/4",
+            "method": "DELETE",
+            "sortNum": 50000,
+            "created": "2024-03-21T14:29:52.768Z",
+            "modified": "2024-03-25T09:34:25.258Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        }
+    ]
+}
