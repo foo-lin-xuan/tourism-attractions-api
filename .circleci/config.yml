@@ -36,8 +36,6 @@ jobs:
             IMAGE_NAME: ctp-project-01-singastays
         steps:
             - checkout
-            - setup_remote_docker      
-            - docker/check
             - run: docker build -t $IMAGE_NAME .
             - snyk/scan: 
                 docker-image-name: $IMAGE_NAME
