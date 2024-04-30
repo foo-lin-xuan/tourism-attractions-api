@@ -31,7 +31,7 @@ jobs:
   # Add Synk scan
   scan:
         docker:
-            - image: maven:3.8.3-openjdk-17
+            - image: cimg/openjdk:19.0.1
         environment:
             IMAGE_NAME: ctp-project-01-singastays
         steps:
