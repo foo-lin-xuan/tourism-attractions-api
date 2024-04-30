@@ -37,10 +37,10 @@ jobs:
             - setup_remote_docker
             - run:
                 command: |
-                  export IMAGE_NAME=ctp-project-01-singastays
-                  docker build -t $IMAGE_NAME .
+                  export IMAGE_NAME=$IMAGE_NAME
+                  docker build -t curlycrypto184/$IMAGE_NAME .
             - snyk/scan: 
-                docker-image-name: docker.io/library/$IMAGE_NAME
+                docker-image-name: curlycrypto184/$IMAGE_NAME
 
   deploy_to_heroku:
     docker:
