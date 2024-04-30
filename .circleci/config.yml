@@ -1,34 +1,65 @@
 version: 2.1
 
 orbs:
-  node: circleci/node@5.0.1
+  docker: circleci/docker@2.1.4
+  heroku: circleci/heroku@2.0.0
 
 jobs:
-  build:
+  build_and_test:
     docker:
-      - image: cimg/node:16.10
+      - image: maven:3.8.3-openjdk-17
     steps:
       - checkout
-      - node/install-packages:
-          pkg-manager: npm
-      - run: |
-          echo "Installing dependencies..."
-          npm install
-  test:
+      - run:
+          name: Build and test the Maven project
+          command: mvn -B -DskipTests clean package
+      
+
+  publish:
     docker:
-      - image: cimg/node:16.10
+      - image: cimg/openjdk:19.0.1
     steps:
+      - setup_remote_docker      
+      - heroku/install
       - checkout
-      - node/install-packages:
-          pkg-manager: npm
-      - run: |
-          echo "Running tests..."
-          npm run test
+      - run:
+          name: Heroku Container Push
+          command: | 
+              heroku container:login
+              heroku container:push web -a ctp-project-01-singastays
+
+  deploy_to_heroku:
+    docker:
+      - image: cimg/openjdk:19.0.1
+    steps:
+      - setup_remote_docker      
+      - heroku/install
+      - checkout
+      - run:
+          name: Heroku Container Push
+          command: | 
+              heroku container:login
+              heroku container:push web -a ctp-project-01-singastays
+              heroku container:release web -a ctp-project-01-singastays
 
 workflows:
-  simple_workflow:
+  build-and-deploy:
     jobs:
-      - build
-      - test:
+      - build_and_test
+      - publish:
           requires:
-            - build
+            - build_and_test
+          filters:
+            branches:
+              only:
+                - develop
+                - main
+                - release
+      - deploy_to_heroku:
+          requires:
+            - build_and_test
+            - publish
+          filters:
+            branches:
+              only:
+                - release
