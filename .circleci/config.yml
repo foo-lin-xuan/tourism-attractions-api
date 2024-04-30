@@ -7,7 +7,7 @@ orbs:
 jobs:
   build_and_test:
     docker:
-      - image: maven:3.6.3-jdk-11
+      - image: maven:3.8.3-openjdk-17
     steps:
       - checkout
       - run:
