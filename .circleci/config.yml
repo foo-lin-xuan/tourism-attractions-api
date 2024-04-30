@@ -61,6 +61,7 @@ workflows:
   ci_flow:
     jobs:
       - build_and_test
+      - scan
       - publish:
           requires:
             - build_and_test
@@ -73,9 +74,13 @@ workflows:
                 - release
   cicd_flow:
     jobs:
+      - build_and_test
+      - scan
+      - publish
       - deploy_to_heroku:
           requires:
             - build_and_test
+            - scan
             - publish
           filters:
             branches:
