@@ -16,17 +16,17 @@ jobs:
       
 
   publish:
-    executor: docker/docker
+    docker:
+      - image: cimg/openjdk:19.0.1
     steps:
-      - setup_remote_docker
+      - setup_remote_docker      
+      - heroku/install
       - checkout
-      - docker/check
-      - docker/build:
-          image: curlycrypto184/singastays-app
-          tag: latest
-      - docker/push:
-          image: curlycrypto184/singastays-app
-          tag: latest
+      - run:
+          name: Heroku Container Push
+          command: | 
+              heroku container:login
+              heroku container:push web -a ctp-project-01-singastays
 
   deploy_to_heroku:
     docker:
@@ -39,8 +39,8 @@ jobs:
           name: Heroku Container Push
           command: | 
               heroku container:login
-              heroku container:push web -a singastays-app
-              heroku container:release web -a singstays-app
+              heroku container:push web -a ctp-project-01-singastays
+              heroku container:release web -a ctp-project-01-singastays
 
 workflows:
   build-and-deploy:
