@@ -11,6 +11,7 @@ RUN mvn -B -DskipTests clean package
 # Use another base image with OpenJDK to run the packaged application
 FROM openjdk:17-jdk-slim
 WORKDIR /app
+ENV PORT=8080
 COPY --from=build /app/target/singastays-0.0.1-SNAPSHOT.jar /app/singastays-0.0.1-SNAPSHOT.jar
 
 # Start the Spring Boot application
