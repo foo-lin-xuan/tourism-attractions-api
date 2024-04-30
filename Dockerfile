@@ -9,7 +9,7 @@ COPY src/ /app/src/
 RUN mvn -B -DskipTests clean package
 
 # Use another base image with OpenJDK to run the packaged application
-FROM openjdk:17-jdk-slim
+FROM openjdk:18.0.1-jdk-slim
 WORKDIR /app
 COPY --from=build /app/target/singastays-0.0.1-SNAPSHOT.jar /app/singastays-0.0.1-SNAPSHOT.jar
 
