@@ -8,23 +8,11 @@ jobs:
   build_and_test:
     docker:
       - image: maven:3.6.3-jdk-11
-      - image: cimg/postgres:14.0
-        environment:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: password
-          POSTGRES_DB: mydb
     steps:
       - checkout
-      - docker/run
-      - run:
-          name: Start PostgreSQL database
-          command: docker run -d --name postgres-test -e POSTGRES_USER=${POSTGRES_USER} -e POSTGRES_PASSWORD=${POSTGRES_PASSWORD} -e POSTGRES_DB=mydb -p 5432:5432 cimg/postgres:14.0
-      - run:
-          name: Build Step
-          command: mvn -B -DskipTests clean package
       - run:
           name: Build and test the Maven project
-          command: mvn clean test -Dspring.datasource.url=jdbc:postgresql://localhost:5432/mydb -Dspring.datasource.username=${POSTGRES_USER} -Dspring.datasource.password=${POSTGRES_PASSWORD}
+          command: mvn clean test
       
 
   publish:
