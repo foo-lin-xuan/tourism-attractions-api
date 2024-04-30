@@ -6,7 +6,7 @@ RUN mvn dependency:go-offline
 
 # Copy the source code and build the project
 COPY src/ /app/src/
-RUN mvn package
+RUN mvn -B -DskipTests clean package
 
 # Use another base image with OpenJDK to run the packaged application
 FROM openjdk:17-jdk-slim
