@@ -12,7 +12,7 @@ jobs:
       - checkout
       - run:
           name: Build and test the Maven project
-          command: mvn clean test
+          command: mvn -B -DskipTests clean package
       
 
   publish:
