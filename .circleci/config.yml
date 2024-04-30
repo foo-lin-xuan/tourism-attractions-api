@@ -1,34 +1,70 @@
 version: 2.1
 
 orbs:
-  node: circleci/node@5.0.1
+  docker: circleci/docker@2.1.4
+  heroku: circleci/heroku@2.0.0
 
 jobs:
-  build:
+  build_and_test:
     docker:
-      - image: cimg/node:16.10
+      - image: maven:3.6.3-jdk-11
     steps:
       - checkout
-      - node/install-packages:
-          pkg-manager: npm
-      - run: |
-          echo "Installing dependencies..."
-          npm install
-  test:
-    docker:
-      - image: cimg/node:16.10
+      - run:
+          name: Start PostgreSQL database
+          command: docker run -d --name postgres-test -e POSTGRES_USER=${POSTGRES_USER} -e POSTGRES_PASSWORD=${POSTGRES_PASSWORD} -e POSTGRES_DB=mydb -p 5432:5432 postgres:latest
+      - run:
+          name: Build and test the Maven project
+          command: mvn clean test -Dspring.datasource.url=jdbc:postgresql://localhost:5432/mydb -Dspring.datasource.username=${POSTGRES_USER} -Dspring.datasource.password=${POSTGRES_PASSWORD}
+      - run:
+          name: Build Step
+          command: mvn -B -DskipTests clean package
+
+  publish:
+    executor: docker/docker
     steps:
+      - setup_remote_docker
       - checkout
-      - node/install-packages:
-          pkg-manager: npm
-      - run: |
-          echo "Running tests..."
-          npm run test
+      - docker/check
+      - docker/build:
+          image: curlycrypto184/singastays-app
+          tag: latest
+      - docker/push:
+          image: curlycrypto184/singastays-app
+          tag: latest
+
+  deploy_to_heroku:
+    docker:
+      - image: cimg/openjdk:19.0.1
+    steps:
+      - setup_remote_docker      
+      - heroku/install
+      - checkout
+      - run:
+          name: Heroku Container Push
+          command: | 
+              heroku container:login
+              heroku container:push web -a singastays-app
+              heroku container:release web -a singstays-app
 
 workflows:
-  simple_workflow:
+  build-and-deploy:
     jobs:
-      - build
-      - test:
+      - build_and_test
+      - publish:
           requires:
-            - build
+            - build_and_test
+          filters:
+            branches:
+              only:
+                - develop
+                - main
+                - release
+      - deploy_to_heroku:
+          requires:
+            - build_and_test
+            - publish
+          filters:
+            branches:
+              only:
+                - release
