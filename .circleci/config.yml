@@ -40,7 +40,9 @@ jobs:
                   export IMAGE_NAME=$IMAGE_NAME
                   docker build -t curlycrypto184/$IMAGE_NAME .
             - snyk/scan: 
+                severity-threshold: high
                 docker-image-name: curlycrypto184/$IMAGE_NAME
+                fail-on-issues: true
 
   deploy_to_heroku:
     docker:
@@ -56,18 +58,21 @@ jobs:
               heroku container:release web -a ctp-project-01-singastays
 
 workflows:
-  build-and-deploy:
+  ci_flow:
     jobs:
       - build_and_test
       - publish:
           requires:
             - build_and_test
+            - scan
           filters:
             branches:
               only:
                 - develop
                 - main
                 - release
+  cicd_flow:
+    jobs:
       - deploy_to_heroku:
           requires:
             - build_and_test
@@ -76,7 +81,3 @@ workflows:
             branches:
               only:
                 - release
-      # The scan job
-      - scan:
-          requires:
-            - build_and_test
