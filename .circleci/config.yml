@@ -15,6 +15,7 @@ jobs:
           POSTGRES_DB: mydb
     steps:
       - checkout
+      - docker/install
       - run:
           name: Start PostgreSQL database
           command: docker run -d --name postgres-test -e POSTGRES_USER=${POSTGRES_USER} -e POSTGRES_PASSWORD=${POSTGRES_PASSWORD} -e POSTGRES_DB=mydb -p 5432:5432 cimg/postgres:14.0
