@@ -3,6 +3,7 @@ version: 2.1
 orbs:
   docker: circleci/docker@2.1.4
   heroku: circleci/heroku@2.0.0
+  snyk: snyk/snyk@1.5.0
 
 jobs:
   build_and_test:
@@ -14,7 +15,6 @@ jobs:
           name: Build and test the Maven project
           command: mvn -B -DskipTests clean package
       
-
   publish:
     docker:
       - image: cimg/openjdk:19.0.1
@@ -27,6 +27,22 @@ jobs:
           command: | 
               heroku container:login
               heroku container:push web -a ctp-project-01-singastays
+  
+  # Add Synk scan
+  scan:
+        docker:
+            - image: cimg/openjdk:19.0.1
+        steps:
+            - checkout
+            - setup_remote_docker
+            - run:
+                command: |
+                  export IMAGE_NAME=$IMAGE_NAME
+                  docker build -t curlycrypto184/$IMAGE_NAME .
+            - snyk/scan: 
+                severity-threshold: high
+                docker-image-name: curlycrypto184/$IMAGE_NAME
+                fail-on-issues: false
 
   deploy_to_heroku:
     docker:
@@ -39,25 +55,32 @@ jobs:
           name: Heroku Container Push
           command: | 
               heroku container:login
-              heroku container:push web -a ctp-project-01-singastays
               heroku container:release web -a ctp-project-01-singastays
 
 workflows:
-  build-and-deploy:
+  ci_flow:
     jobs:
       - build_and_test
+      - scan
       - publish:
           requires:
             - build_and_test
+            - scan
           filters:
             branches:
               only:
                 - develop
                 - main
                 - release
+  cicd_flow:
+    jobs:
+      - build_and_test
+      - scan
+      - publish
       - deploy_to_heroku:
           requires:
             - build_and_test
+            - scan
             - publish
           filters:
             branches:

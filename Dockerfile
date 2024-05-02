@@ -14,5 +14,6 @@ WORKDIR /app
 COPY --from=build /app/target/singastays-0.0.1-SNAPSHOT.jar /app/singastays-0.0.1-SNAPSHOT.jar
 
 # Start the Spring Boot application
-CMD ["java", "-jar", "singastays-0.0.1-SNAPSHOT.jar"]
+#CMD ["java", "-jar", "singastays-0.0.1-SNAPSHOT.jar"]
+CMD java -Dserver.port=$PORT $JAVA_OPTS -jar singastays-0.0.1-SNAPSHOT.jar
 
