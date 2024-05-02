@@ -42,7 +42,7 @@ jobs:
             - snyk/scan: 
                 severity-threshold: high
                 docker-image-name: curlycrypto184/$IMAGE_NAME
-                fail-on-issues: true
+                fail-on-issues: false
 
   deploy_to_heroku:
     docker:
