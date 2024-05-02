@@ -13,49 +13,49 @@ jobs:
       - checkout
       - run:
           name: Build and test the Maven project
-          command: mvn -B -DskipTests clean package
-      
+          command: mvn -B clean test
+
   publish:
     docker:
       - image: cimg/openjdk:19.0.1
     steps:
-      - setup_remote_docker      
+      - setup_remote_docker
       - heroku/install
       - checkout
       - run:
           name: Heroku Container Push
-          command: | 
-              heroku container:login
-              heroku container:push web -a ctp-project-01-singastays
-  
+          command: |
+            heroku container:login
+            heroku container:push web -a ctp-project-01-singastays
+
   # Add Synk scan
   scan:
-        docker:
-            - image: cimg/openjdk:19.0.1
-        steps:
-            - checkout
-            - setup_remote_docker
-            - run:
-                command: |
-                  export IMAGE_NAME=$IMAGE_NAME
-                  docker build -t curlycrypto184/$IMAGE_NAME .
-            - snyk/scan: 
-                severity-threshold: high
-                docker-image-name: curlycrypto184/$IMAGE_NAME
-                fail-on-issues: false
+    docker:
+      - image: cimg/openjdk:19.0.1
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          command: |
+            export IMAGE_NAME=$IMAGE_NAME
+            docker build -t curlycrypto184/$IMAGE_NAME .
+      - snyk/scan:
+          severity-threshold: high
+          docker-image-name: curlycrypto184/$IMAGE_NAME
+          fail-on-issues: false
 
   deploy_to_heroku:
     docker:
       - image: cimg/openjdk:19.0.1
     steps:
-      - setup_remote_docker      
+      - setup_remote_docker
       - heroku/install
       - checkout
       - run:
           name: Heroku Container Push
-          command: | 
-              heroku container:login
-              heroku container:release web -a ctp-project-01-singastays
+          command: |
+            heroku container:login
+            heroku container:release web -a ctp-project-01-singastays
 
 workflows:
   ci_flow:
