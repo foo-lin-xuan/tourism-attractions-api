@@ -13,7 +13,7 @@ jobs:
       - checkout
       - run:
           name: Build the Maven project
-          command: mvn -B -Dskiptests clean package
+          command: mvn -B -DskipTests clean package
   test:
     docker:
       - image: maven:3.8.3-openjdk-17
