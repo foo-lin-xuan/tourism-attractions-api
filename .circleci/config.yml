@@ -6,15 +6,22 @@ orbs:
   snyk: snyk/snyk@1.5.0
 
 jobs:
-  build_and_test:
+  build:
     docker:
       - image: maven:3.8.3-openjdk-17
     steps:
       - checkout
       - run:
-          name: Build and test the Maven project
+          name: Build the Maven project
+          command: mvn -B -Dskiptests clean package
+  test:
+    docker:
+      - image: maven:3.8.3-openjdk-17
+    steps:
+      - checkout
+      - run:
+          name: Test the Maven project
           command: mvn -B clean test
-
   publish:
     docker:
       - image: cimg/openjdk:19.0.1
@@ -60,11 +67,14 @@ jobs:
 workflows:
   ci_flow:
     jobs:
-      - build_and_test
+      - build
+      - test:
+          requires: build
       - scan
       - publish:
           requires:
-            - build_and_test
+            - build
+            - test
             - scan
           filters:
             branches:
@@ -74,12 +84,15 @@ workflows:
                 - release
   cicd_flow:
     jobs:
-      - build_and_test
+      - build
+      - test:
+          requires: build
       - scan
       - publish
       - deploy_to_heroku:
           requires:
-            - build_and_test
+            - build
+            - test
             - scan
             - publish
           filters:
