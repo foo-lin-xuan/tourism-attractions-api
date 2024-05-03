@@ -71,10 +71,21 @@ workflows:
       - test:
           requires: 
             - build
-      - scan
-      - publish:
+          filters:
+            branches:
+              only:
+                - develop
+                - main
+      - scan:
           requires:
             - build
+          filters:
+            branches:
+              only:
+                - develop
+                - main
+      - publish:
+          requires:
             - test
             - scan
           filters:
@@ -82,7 +93,6 @@ workflows:
               only:
                 - develop
                 - main
-                - release
   cicd_flow:
     jobs:
       - build:
@@ -98,20 +108,22 @@ workflows:
               only:
                 - release
       - scan:
+          requires: 
+            - build
           filters:
             branches:
               only:
                 - release
       - publish:
+          requires:
+            - test
+            - scan
           filters:
             branches:
               only:
                 - release
       - deploy_to_heroku:
           requires:
-            - build
-            - test
-            - scan
             - publish
           filters:
             branches:
