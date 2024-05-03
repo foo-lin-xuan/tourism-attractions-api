@@ -69,7 +69,8 @@ workflows:
     jobs:
       - build
       - test:
-          requires: build
+          requires: 
+            - build
       - scan
       - publish:
           requires:
@@ -86,7 +87,8 @@ workflows:
     jobs:
       - build
       - test:
-          requires: build
+          requires: 
+            - build
       - scan
       - publish
       - deploy_to_heroku:
