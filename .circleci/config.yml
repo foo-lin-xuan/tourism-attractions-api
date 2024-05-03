@@ -85,12 +85,28 @@ workflows:
                 - release
   cicd_flow:
     jobs:
-      - build
+      - build:
+          filters:
+            branches:
+              only:
+                - release
       - test:
           requires: 
             - build
-      - scan
-      - publish
+          filters:
+            branches:
+              only:
+                - release
+      - scan:
+          filters:
+            branches:
+              only:
+                - release
+      - publish:
+          filters:
+            branches:
+              only:
+                - release
       - deploy_to_heroku:
           requires:
             - build
