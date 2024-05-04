@@ -6,81 +6,129 @@ orbs:
   snyk: snyk/snyk@1.5.0
 
 jobs:
-  build_and_test:
+  build:
     docker:
       - image: maven:3.8.3-openjdk-17
     steps:
       - checkout
       - run:
-          name: Build and test the Maven project
+          name: Build the Maven project
           command: mvn -B -DskipTests clean package
-      
+  test:
+    docker:
+      - image: maven:3.8.3-openjdk-17
+    steps:
+      - checkout
+      - run:
+          name: Test the Maven project
+          command: mvn -B clean test
   publish:
     docker:
       - image: cimg/openjdk:19.0.1
     steps:
-      - setup_remote_docker      
+      - setup_remote_docker
       - heroku/install
       - checkout
       - run:
           name: Heroku Container Push
-          command: | 
-              heroku container:login
-              heroku container:push web -a ctp-project-01-singastays
-  
+          command: |
+            heroku container:login
+            heroku container:push web -a ctp-project-01-singastays
+
   # Add Synk scan
   scan:
-        docker:
-            - image: cimg/openjdk:19.0.1
-        steps:
-            - checkout
-            - setup_remote_docker
-            - run:
-                command: |
-                  export IMAGE_NAME=$IMAGE_NAME
-                  docker build -t curlycrypto184/$IMAGE_NAME .
-            - snyk/scan: 
-                severity-threshold: high
-                docker-image-name: curlycrypto184/$IMAGE_NAME
-                fail-on-issues: false
+    docker:
+      - image: cimg/openjdk:19.0.1
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          command: |
+            export IMAGE_NAME=$IMAGE_NAME
+            docker build -t curlycrypto184/$IMAGE_NAME .
+      - snyk/scan:
+          severity-threshold: high
+          docker-image-name: curlycrypto184/$IMAGE_NAME
+          fail-on-issues: false
 
   deploy_to_heroku:
     docker:
       - image: cimg/openjdk:19.0.1
     steps:
-      - setup_remote_docker      
+      - setup_remote_docker
       - heroku/install
       - checkout
       - run:
           name: Heroku Container Push
-          command: | 
-              heroku container:login
-              heroku container:release web -a ctp-project-01-singastays
+          command: |
+            heroku container:login
+            heroku container:release web -a ctp-project-01-singastays
 
 workflows:
   ci_flow:
     jobs:
-      - build_and_test
-      - scan
+      - build:
+          filters:
+            branches:
+              only:
+                - develop
+                - main
+      - test:
+          requires: 
+            - build
+          filters:
+            branches:
+              only:
+                - develop
+                - main
+      - scan:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - develop
+                - main
       - publish:
           requires:
-            - build_and_test
+            - test
             - scan
           filters:
             branches:
               only:
                 - develop
                 - main
-                - release
   cicd_flow:
     jobs:
-      - build_and_test
-      - scan
-      - publish
+      - build:
+          filters:
+            branches:
+              only:
+                - release
+      - test:
+          requires: 
+            - build
+          filters:
+            branches:
+              only:
+                - release
+      - scan:
+          requires: 
+            - build
+          filters:
+            branches:
+              only:
+                - release
+      - publish:
+          requires:
+            - test
+            - scan
+          filters:
+            branches:
+              only:
+                - release
       - deploy_to_heroku:
           requires:
-            - build_and_test
-            - scan
             - publish
           filters:
             branches:
