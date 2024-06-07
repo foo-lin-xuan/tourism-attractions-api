@@ -2,6 +2,16 @@
 
 Tourism Attractions API is a Spring Boot REST API connecting to a PostgreSQL database, inspired by [SingaStays](https://github.com/Aishahaha/ntu-project-1). The API allows users to manage members, attractions, categories and favourites data. The database is loaded with preset data for users to explore usage of the API.
 
+## Table of Contents
+
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Installation](#installation)
+- [API Endpoints](#api-endpoints)
+- [Example Requests](#example-requests)
+- [Limitations](#limitations)
+- [Group Contributions](#group-contributions)
+
 ## Features
 
 - Create, read, update and delete members
@@ -19,6 +29,33 @@ Tourism Attractions API is a Spring Boot REST API connecting to a PostgreSQL dat
 - Java
 - Spring Boot
 - Spring Data JPA
+- PostgreSQL
+- Thunder Client (for API testing)
+
+## Installation
+
+1. **Clone the repository:**
+    ```sh
+    git clone https://github.com/toonuaaa/tourism-attractions-api.git
+    cd tourism-attractions-api
+    ```
+
+2. **Set up the PostgreSQL database:**
+    - Install PostgreSQL if it's not already installed.
+    - Create a new database named `singastays`.
+
+3. **Configure environment variables:**
+    - Create a `.env` file in the `tourism-attractions-api/src/main/resources/` directory and add the following:
+      ```
+      DATASOURCE_URL=jdbc:postgresql://localhost:5432/singastays
+      DATASOURCE_USERNAME=yourusername
+      DATASOURCE_PASSWORD=yourpassword
+      ```
+
+4. **Run the application:**
+    ```sh
+    mvn clean spring-boot:run
+    ```
 
 ## API Endpoints
 
@@ -45,9 +82,27 @@ Tourism Attractions API is a Spring Boot REST API connecting to a PostgreSQL dat
 | GET    | `/user-favourites`                   | Retrieve all favourites entries                                                             |                        |
 | GET    | `/user-favourites/{id}`              | Retrieve one favourites entry based on ID                                                   |                        |
 
+## Example Requests
+
 Example requests for all endpoints are available in the Thunder Client collections included in the thunder_clients directory.
 
-<!-- ## Trying it Out -->
+### Thunder Client Collections
+
+To use the Thunder Client collections:
+
+1. Open Visual Studio Code.
+2. Ensure you have the Thunder Client extension installed.
+3. Navigate to the Thunder Client extension.
+4. Click on the `Collections` tab.
+5. Click on the `Import` button.
+6. Select the exported collection files located in the `thunder_clients` folder in this repository.
+
+### Collection Files
+
+- [Members Collection](thunder_clients/thunder-collection_Members.json)
+- [Attractions Collection](thunder_clients/thunder-collection_Attractions.json)
+- [Categories Collection](thunder_clients/thunder-collection_Category.json)
+- [Favourites Collection](thunder_clients/thunder-collection_UserFavourite.json)
 
 ## Limitations
 
@@ -61,4 +116,6 @@ This project was developed by a team of contributors. The key features and imple
 - Lin Xuan: Worked on categories and members
 - Aishah: Worked on attractions
 - YH: Worked on favourites
+
+[Original GitHub Repository](https://github.com/Aishahaha/singastays-m3)
 
