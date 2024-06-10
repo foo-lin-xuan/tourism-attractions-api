@@ -1,6 +1,6 @@
 # Tourism Attractions API
 
-Tourism Attractions API is a Spring Boot REST API connecting to a PostgreSQL database, inspired by [SingaStays](https://github.com/Aishahaha/ntu-project-1). The API allows users to manage members, attractions, categories and favourites data. The database is loaded with preset data for users to explore usage of the API.
+Tourism Attractions API is a Spring Boot REST API connecting to a PostgreSQL database, inspired by [SingaStays](https://github.com/toonuaaa/SingaStays). The API allows users to manage members, attractions, categories and favourites data. The database is loaded with preset data for users to explore usage of the API.
 
 ## Table of Contents
 
