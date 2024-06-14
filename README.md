@@ -113,8 +113,8 @@ To use the Thunder Client collections:
 
 This project was developed by a team of contributors. The key features and implementation were done by:
 
-- Lin Xuan: Worked on categories and members
-- Aishah: Worked on attractions
+- Lin Xuan: Worked on attractions and categories 
+- Aishah: Worked on attractions and members
 - YH: Worked on favourites
 
 [Original GitHub Repository](https://github.com/Aishahaha/singastays-m3)
